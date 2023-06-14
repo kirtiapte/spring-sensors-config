@@ -33,7 +33,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/spring-sensors:latest@sha256:b8991d5b97348a5f769f5c1637bd9bb3a8fa09b543d71659e43679e488e23f0b
+        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/spring-sensors:latest@sha256:5f1abfc0125f1e367ac703dc9d690e4c2531168fe5390b7ca5945045630417ec
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -53,7 +53,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:eb55357bdf16b86ff23d8c240e5ff49fceaf42c2ee0a271d8dea3075b2cc6b4d
+        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:a428e17b1fbba36c7f8b259b1c0ae79575c1e919616c74c6e2fe90b3a5df4ca4
         livenessProbe:
           httpGet:
             path: /livez
@@ -68,12 +68,7 @@ spec:
             path: /readyz
             port: 8080
             scheme: HTTP
-        resources:
-          limits:
-            memory: 512Mi
-          requests:
-            cpu: 500m
-            memory: 512Mi
+        resources: {}
         securityContext:
           runAsUser: 1000
       serviceAccountName: default
