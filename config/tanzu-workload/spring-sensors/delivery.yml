@@ -16,10 +16,14 @@ spec:
   template:
     metadata:
       annotations:
+        apps.tanzu.vmware.com/live-update: "true"
+        autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/version: 3.0.6
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
+          developer-conventions/live-update-convention
+          developer-conventions/add-source-image-label
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
@@ -29,6 +33,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
+        developer.apps.tanzu.vmware.com/image-source-digest: kapte.azurecr.io/tap-packages/spring-sensors:latest@sha256:b8991d5b97348a5f769f5c1637bd9bb3a8fa09b543d71659e43679e488e23f0b
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -48,7 +53,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:91b75804d2503bad9a3752bbaf274e6bc2369a914915a7050529dad0caeb9425
+        image: kapte.azurecr.io/tap-packages/spring-sensors-tanzu-workload@sha256:eb55357bdf16b86ff23d8c240e5ff49fceaf42c2ee0a271d8dea3075b2cc6b4d
         livenessProbe:
           httpGet:
             path: /livez
